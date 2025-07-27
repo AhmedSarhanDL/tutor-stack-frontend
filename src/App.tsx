@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import LoginPage from './components/LoginPage';
+import RegisterPage from './components/RegisterPage';
 import Dashboard from './components/Dashboard';
 import ChatPage from './components/ChatPage';
 import PdfUploadPage from './components/PdfUploadPage';
@@ -31,7 +32,7 @@ function AppRoutes() {
     );
   }
 
-  // If not authenticated, redirect to login for ALL routes except /login
+  // If not authenticated, redirect to login for ALL routes except /login and /register
   if (!user) {
     console.log('AppRoutes: User not authenticated, redirecting to login');
     return (
@@ -39,6 +40,7 @@ function AppRoutes() {
         <ErrorDisplay error={error} onClear={clearError} />
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </>

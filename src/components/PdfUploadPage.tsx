@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth, api } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import './PdfUploadPage.css';
 
 interface UploadedFile {
@@ -14,7 +14,7 @@ interface UploadedFile {
 }
 
 const PdfUploadPage: React.FC = () => {
-  const { user } = useAuth();
+  const { api } = useAuth();
   const navigate = useNavigate();
   const [isDragOver, setIsDragOver] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -101,7 +101,7 @@ const PdfUploadPage: React.FC = () => {
         formData.append('description', description.trim());
       }
 
-      const response = await api.post('/content/upload-pdf', formData, {
+      await api.post('/content/upload-pdf', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

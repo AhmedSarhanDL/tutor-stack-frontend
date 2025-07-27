@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import './LoginPage.css';
 
 const LoginPage: React.FC = () => {
-  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const { login, register, loginWithGoogle } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -21,19 +18,12 @@ const LoginPage: React.FC = () => {
     setError('');
 
     try {
-      console.log('LoginPage: Starting authentication...');
-      if (isLogin) {
-        console.log('LoginPage: Attempting login...');
-        await login(email, password);
-      } else {
-        console.log('LoginPage: Attempting registration...');
-        await register(email, password, firstName, lastName);
-      }
-      console.log('Authentication successful, navigating to dashboard');
-      // Redirect to dashboard using React Router
+      console.log('LoginPage: Attempting login...');
+      await login(email, password);
+      console.log('Login successful, navigating to dashboard');
       navigate('/dashboard');
     } catch (err: any) {
-      console.error('LoginPage: Authentication error:', err);
+      console.error('LoginPage: Login error:', err);
       const errorMessage = err.response?.data?.detail || err.message || 'An error occurred. Please try again.';
       console.error('LoginPage: Error message:', errorMessage);
       setError(errorMessage);
@@ -51,7 +41,7 @@ const LoginPage: React.FC = () => {
       <div className="login-card">
         <div className="login-header">
           <h1>Tutor Stack</h1>
-          <p>Welcome to your learning platform</p>
+          <p>Welcome back to your learning platform</p>
         </div>
 
         {error && (
@@ -61,35 +51,6 @@ const LoginPage: React.FC = () => {
         )}
 
         <form onSubmit={handleSubmit} className="login-form">
-          {!isLogin && (
-            <>
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required={!isLogin}
-                    placeholder="Enter your first name"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="lastName">Last Name</label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required={!isLogin}
-                    placeholder="Enter your last name"
-                  />
-                </div>
-              </div>
-            </>
-          )}
-
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -119,7 +80,7 @@ const LoginPage: React.FC = () => {
             className="submit-btn"
             disabled={isLoading}
           >
-            {isLoading ? 'Loading...' : (isLogin ? 'Sign In' : 'Sign Up')}
+            {isLoading ? 'Signing In...' : 'Sign In'}
           </button>
         </form>
 
@@ -143,17 +104,10 @@ const LoginPage: React.FC = () => {
 
         <div className="toggle-form">
           <p>
-            {isLogin ? "Don't have an account? " : "Already have an account? "}
-            <button
-              type="button"
-              onClick={() => {
-                setIsLogin(!isLogin);
-                setError('');
-              }}
-              className="toggle-btn"
-            >
-              {isLogin ? 'Sign Up' : 'Sign In'}
-            </button>
+            Don't have an account?{' '}
+            <Link to="/register" className="toggle-btn">
+              Sign Up
+            </Link>
           </p>
         </div>
       </div>

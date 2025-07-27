@@ -8,6 +8,7 @@ interface User {
   first_name?: string;
   last_name?: string;
   role?: string;
+  grade?: string;
   is_active: boolean;
 }
 
@@ -19,8 +20,9 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   loginWithGoogle: () => void;
   logout: () => void;
-  register: (email: string, password: string, first_name?: string, last_name?: string) => Promise<void>;
+  register: (email: string, password: string, first_name?: string, last_name?: string, role?: string, grade?: string) => Promise<void>;
   clearError: () => void;
+  api: typeof api;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -191,7 +193,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setError(null);
   };
 
-  const register = async (email: string, password: string, first_name?: string, last_name?: string) => {
+  const register = async (email: string, password: string, first_name?: string, last_name?: string, role?: string, grade?: string) => {
     try {
       console.log('AuthContext: Attempting registration with:', email);
       
@@ -200,6 +202,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         password,
         first_name,
         last_name,
+        role,
+        grade,
       });
 
       const { access_token } = response.data;
@@ -235,7 +239,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           email: email,
           first_name: first_name || '',
           last_name: last_name || '',
-          role: 'user',
+          role: role || 'user',
+          grade: grade || '',
           is_active: true
         };
         setError(null);
@@ -261,6 +266,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     logout,
     register,
     clearError,
+    api,
   };
 
   return (

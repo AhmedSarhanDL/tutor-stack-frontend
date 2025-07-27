@@ -133,6 +133,7 @@ const Dashboard: React.FC = () => {
             {user.first_name && <p><strong>First Name:</strong> {user.first_name}</p>}
             {user.last_name && <p><strong>Last Name:</strong> {user.last_name}</p>}
             <p><strong>Role:</strong> {user.role || 'student'}</p>
+            {user.grade && <p><strong>Grade:</strong> {user.grade}</p>}
             <p><strong>Status:</strong> {user.is_active ? 'Active' : 'Inactive'}</p>
           </div>
         </div>

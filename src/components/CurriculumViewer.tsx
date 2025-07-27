@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth, api } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import './CurriculumViewer.css';
 
 interface SubConcept {
@@ -21,7 +21,7 @@ interface CurriculumData {
 }
 
 const CurriculumViewer: React.FC = () => {
-  const { user } = useAuth();
+  const { api } = useAuth();
   const navigate = useNavigate();
   const [curriculum, setCurriculum] = useState<CurriculumData | null>(null);
   const [loading, setLoading] = useState(true);
