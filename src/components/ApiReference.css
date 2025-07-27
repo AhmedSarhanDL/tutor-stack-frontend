@@ -1,0 +1,182 @@
+.api-reference {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.api-reference h2 {
+  color: #2d3748;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+}
+
+.api-description {
+  color: #4a5568;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 24px 0;
+}
+
+.api-services {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.api-service {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  background: #f7fafc;
+}
+
+.api-service h3 {
+  color: #2d3748;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.base-url {
+  color: #718096;
+  font-size: 14px;
+  margin: 0 0 16px 0;
+}
+
+.base-url code {
+  background: #edf2f7;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #2d3748;
+}
+
+.endpoints {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.endpoint {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.method-badge {
+  flex-shrink: 0;
+}
+
+.method {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  min-width: 60px;
+  text-align: center;
+}
+
+.method.get {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.method.post {
+  background: #fed7d7;
+  color: #742a2a;
+}
+
+.method.put {
+  background: #fef5e7;
+  color: #744210;
+}
+
+.method.delete {
+  background: #fed7d7;
+  color: #742a2a;
+}
+
+.endpoint-details {
+  flex: 1;
+}
+
+.path {
+  display: block;
+  background: #edf2f7;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 14px;
+  color: #2d3748;
+  margin: 0 0 4px 0;
+}
+
+.description {
+  color: #4a5568;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.authentication-info {
+  margin-top: 24px;
+  padding: 20px;
+  background: #fef5e7;
+  border-radius: 8px;
+  border: 1px solid #f6ad55;
+}
+
+.authentication-info h3 {
+  color: #744210;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.authentication-info p {
+  color: #744210;
+  font-size: 14px;
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+.auth-example {
+  display: block;
+  background: #edf2f7;
+  padding: 12px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 14px;
+  color: #2d3748;
+  border: 1px solid #cbd5e0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .api-reference {
+    padding: 16px;
+  }
+  
+  .api-service {
+    padding: 16px;
+  }
+  
+  .endpoint {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .method-badge {
+    align-self: flex-start;
+  }
+} 
