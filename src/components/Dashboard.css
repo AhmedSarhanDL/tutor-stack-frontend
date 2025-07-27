@@ -124,6 +124,19 @@
   transform: translateY(-1px);
 }
 
+.feature-btn.primary {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-weight: 600;
+  padding: 10px 18px;
+  font-size: 13px;
+}
+
+.feature-btn.primary:hover {
+  background: linear-gradient(135deg, #5a67d8, #6b46c1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
 .feature-buttons {
   display: flex;
   flex-direction: column;

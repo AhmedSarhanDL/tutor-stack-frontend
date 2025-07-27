@@ -186,6 +186,18 @@ const Dashboard: React.FC = () => {
               <p>Access and manage learning content, courses, and materials</p>
               <div className="feature-buttons">
                 <button 
+                  onClick={() => navigate('/pdf-upload')}
+                  className="feature-btn primary"
+                >
+                  📄 Upload PDF
+                </button>
+                <button 
+                  onClick={() => navigate('/curriculum')}
+                  className="feature-btn primary"
+                >
+                  📚 View Curriculum
+                </button>
+                <button 
                   onClick={() => testApiEndpoint('/content/ingest', 'Content Ingestion', 'POST', { 
                     text: 'Sample learning content about machine learning algorithms and their applications in real-world scenarios.' 
                   })}
@@ -228,18 +240,18 @@ const Dashboard: React.FC = () => {
               <p>Get help from AI tutors and chat with the system</p>
               <div className="feature-buttons">
                 <button 
+                  onClick={() => navigate('/chat')}
+                  className="feature-btn primary"
+                >
+                  💬 Open Chat
+                </button>
+                <button 
                   onClick={() => testApiEndpoint('/chat/answer', 'Chat Answer', 'POST', { 
                     question: 'What is the difference between supervised and unsupervised learning?' 
                   })}
                   className="feature-btn"
                 >
-                  💬 Ask Question
-                </button>
-                <button 
-                  onClick={() => testApiEndpoint('/chat/', 'Chat History', 'GET')}
-                  className="feature-btn"
-                >
-                  📜 Chat History
+                  🧪 Test API
                 </button>
               </div>
             </div>

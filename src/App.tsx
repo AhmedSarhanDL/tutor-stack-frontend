@@ -1,9 +1,10 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import LoginPage from './components/LoginPage';
 import Dashboard from './components/Dashboard';
-import ProtectedRoute from './components/ProtectedRoute';
+import ChatPage from './components/ChatPage';
+import PdfUploadPage from './components/PdfUploadPage';
+import CurriculumViewer from './components/CurriculumViewer';
 import ErrorBoundary from './components/ErrorBoundary';
 import ErrorDisplay from './components/ErrorDisplay';
 import TestPage from './components/TestPage';
@@ -55,6 +56,9 @@ function AppRoutes() {
         
         {/* Protected routes */}
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/chat" element={<ChatPage />} />
+        <Route path="/pdf-upload" element={<PdfUploadPage />} />
+        <Route path="/curriculum" element={<CurriculumViewer />} />
         <Route path="/test" element={<TestPage />} />
         
         {/* Default redirects for authenticated users */}
