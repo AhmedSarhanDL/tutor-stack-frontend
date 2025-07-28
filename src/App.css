@@ -10,22 +10,40 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
+  color: #2d3748;
 }
 
 .App {
   min-height: 100vh;
   width: 100%;
   height: 100%;
+  background-color: #ffffff;
+  color: #2d3748;
 }
 
 /* Reset button styles */
 button {
   font-family: inherit;
+  color: white;
 }
 
 /* Reset input styles */
 input {
   font-family: inherit;
+  color: #2d3748;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+input::placeholder {
+  color: #a0aec0;
 }
 
 /* Remove default focus outline and add custom one */
@@ -39,14 +57,32 @@ input {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f7fafc;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background: #cbd5e0;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: #a0aec0;
+}
+
+/* Ensure all text is visible */
+p, h1, h2, h3, h4, h5, h6, span, div, label {
+  color: #2d3748;
+}
+
+/* Ensure form elements are visible */
+textarea, select {
+  color: #2d3748;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+textarea:focus, select:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
 }
