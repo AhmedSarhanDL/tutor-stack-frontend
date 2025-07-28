@@ -28,7 +28,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // API base URL - adjust based on your setup
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://api.tutor-stack.local';
 
 // Create axios instance with base configuration
 const api = axios.create({
@@ -206,50 +206,45 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         grade,
       });
 
-      const { access_token } = response.data;
-      console.log('AuthContext: Registration successful, got access token');
+      console.log('AuthContext: Registration successful, user data received:', response.data);
+      
+      // FastAPI Users registration returns user data, not access token
+      // We need to login after registration to get the access token
+      const userData = response.data;
+      
+      if (!userData || !userData.email) {
+        throw new Error('Invalid user data received from server');
+      }
+      
+      // Now login to get the access token
+      console.log('AuthContext: Logging in after registration...');
+      const loginFormData = new URLSearchParams();
+      loginFormData.append('username', email);
+      loginFormData.append('password', password);
+      
+      const loginResponse = await api.post('/auth/jwt/login', loginFormData, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+
+      const { access_token } = loginResponse.data;
+      console.log('AuthContext: Login after registration successful, got access token');
       
       if (!access_token) {
         throw new Error('No access token received from server');
       }
       
-      // Set the token first
+      // Set the token
       setToken(access_token);
       localStorage.setItem('auth_token', access_token);
       
-      // Try to fetch user data, but if it fails, create minimal user data
-      try {
-        console.log('AuthContext: Fetching user data after registration...');
-        const userResponse = await api.get('/auth/users/me');
-        const userData = userResponse.data;
-        console.log('AuthContext: User data received:', userData);
-        
-        if (!userData || !userData.email) {
-          throw new Error('Invalid user data received from server');
-        }
-        
-        setError(null);
-        localStorage.setItem('user', JSON.stringify(userData));
-        setUser(userData);
-      } catch (userError) {
-        console.error('AuthContext: Error fetching user data after registration:', userError);
-        // Create user data from registration info
-        const userData = {
-          id: 'new_user',
-          email: email,
-          first_name: first_name || '',
-          last_name: last_name || '',
-          role: role || 'user',
-          grade: grade || '',
-          is_active: true
-        };
-        setError(null);
-        localStorage.setItem('user', JSON.stringify(userData));
-        setUser(userData);
-        console.log('AuthContext: Using registration user data');
-      }
+      // Set user data
+      setError(null);
+      localStorage.setItem('user', JSON.stringify(userData));
+      setUser(userData);
       
-      console.log('AuthContext: Registration state updated, token and user set');
+      console.log('AuthContext: Registration and login completed successfully');
     } catch (error) {
       console.error('AuthContext: Registration error:', error);
       throw error;
