@@ -113,7 +113,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       formData.append('username', email);
       formData.append('password', password);
       
-      const response = await api.post('/auth/jwt/login', formData, {
+      const response = await api.post('/jwt/login', formData, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -133,7 +133,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       // Now fetch the user data using the token
       try {
         console.log('AuthContext: Fetching user data...');
-        const userResponse = await api.get('/auth/users/me');
+        const userResponse = await api.get('/users/me');
         const userData = userResponse.data;
         console.log('AuthContext: User data received:', userData);
         
@@ -176,7 +176,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const loginWithGoogle = () => {
     // Redirect to Google OAuth endpoint
-    window.location.href = `${API_BASE_URL}/auth/google/authorize`;
+    window.location.href = `${API_BASE_URL}/google/authorize`;
   };
 
   const logout = () => {
@@ -197,7 +197,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       console.log('AuthContext: Attempting registration with:', email);
       
-      const response = await api.post('/auth/register', {
+      const response = await api.post('/register', {
         email,
         password,
         first_name,
@@ -222,7 +222,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       loginFormData.append('username', email);
       loginFormData.append('password', password);
       
-      const loginResponse = await api.post('/auth/jwt/login', loginFormData, {
+      const loginResponse = await api.post('/jwt/login', loginFormData, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
